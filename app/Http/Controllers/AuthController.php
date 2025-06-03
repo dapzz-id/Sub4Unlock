@@ -20,10 +20,19 @@ class AuthController extends Controller
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
+        ],[
+            'email.required' => 'The email field is required.',
+            'email.email' => 'The email must be a valid email address.',
+            'password.required' => 'The password field is required.',
         ]);
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
+            
+            if (Auth::user()->role === 'superadmin') {
+                return redirect()->intended(route('superadmin.dashboard'));
+            }
+            
             return redirect()->intended(route('admin.dashboard'));
         }
 
@@ -43,6 +52,23 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Password::min(6)],
+        ],[
+            'password.confirmed' => 'The password confirmation does not match.',
+            'email.unique' => 'This email is already registered.',
+            'name.required' => 'The name field is required.',
+            'email.required' => 'The email field is required.',
+            'password.required' => 'The password field is required.',
+            'password.min' => 'The password must be at least 6 characters.',
+            'name.string' => 'The name must be a string.',
+            'email.string' => 'The email must be a string.',
+            'email.email' => 'The email must be a valid email address.',
+            'email.max' => 'The email may not be greater than 255 characters.',
+            'name.max' => 'The name may not be greater than 255 characters.',
+            'password.string' => 'The password must be a string.',
+            'password.max' => 'The password may not be greater than 255 characters.',
+            'password.confirmed' => 'The password confirmation does not match.',
+            'password.min' => 'The password must be at least 6 characters.',
+            'password.regex' => 'The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.',
         ]);
 
         $user = User::create([

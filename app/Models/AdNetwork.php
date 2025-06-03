@@ -1,5 +1,4 @@
 <?php
-// app/Models/AdNetwork.php
 
 namespace App\Models;
 

@@ -1,25 +1,8 @@
-{{-- resources/views/auth/login.blade.php --}}
 @extends('layouts.app')
 
 @section('content')
 <div class="min-h-screen flex items-center justify-center p-4">
     <div class="w-full max-w-md">
-        <!-- Header -->
-        <div class="text-center mb-8">
-            <a href="{{ route('home') }}" class="inline-flex items-center space-x-2 mb-6">
-                <div class="w-10 h-10 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-lg flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                    </svg>
-                </div>
-                <span class="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                    Sub4Unlock 2200
-                </span>
-            </a>
-            <h1 class="text-3xl font-bold text-white mb-2">Welcome Back</h1>
-            <p class="text-gray-400">Sign in to access the admin dashboard</p>
-        </div>
-
         <!-- Login Card -->
         <div class="bg-white/5 border border-white/10 backdrop-blur-md rounded-lg p-6">
             <div class="text-center mb-6">
