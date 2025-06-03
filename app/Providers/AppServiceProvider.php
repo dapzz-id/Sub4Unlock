@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Models\AdNetwork;
 use App\Observers\AdNetworkObserver;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,5 +23,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         AdNetwork::observe(AdNetworkObserver::class);
+        Schema::defaultStringLength(191);
     }
 }
