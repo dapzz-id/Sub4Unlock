@@ -28,7 +28,6 @@ class AdNetwork extends Model
         return $this->hasMany(UnlockLink::class);
     }
 
-    // Get provider configuration
     public static function getProviderConfig($provider)
     {
         $configs = [
@@ -43,45 +42,30 @@ class AdNetwork extends Model
                 'icon' => 'google',
                 'color' => 'from-blue-500 to-green-500'
             ],
-            'unity' => [
-                'name' => 'Unity Ads',
+            'propellerads' => [
+                'name' => 'PropellerAds',
                 'fields' => [
-                    'game_id' => 'Game ID',
-                    'api_key' => 'API Key',
-                    'placement_id' => 'Placement ID'
+                    'public_key' => 'Public Key'
                 ],
-                'icon' => 'unity',
-                'color' => 'from-gray-700 to-black'
+                'icon' => 'bolt',
+                'color' => 'from-yellow-400 to-orange-500'
             ],
-            'facebook' => [
-                'name' => 'Facebook Audience Network',
+            'adsterra' => [
+                'name' => 'Adsterra',
                 'fields' => [
-                    'app_id' => 'App ID',
-                    'app_secret' => 'App Secret',
-                    'placement_id' => 'Placement ID'
+                    'public_key' => 'Public Key'
                 ],
-                'icon' => 'facebook',
-                'color' => 'from-blue-600 to-blue-800'
+                'icon' => 'star',
+                'color' => 'from-pink-500 to-red-500'
             ],
-            'admob' => [
-                'name' => 'Google AdMob',
+            'medianet' => [
+                'name' => 'Media.net',
                 'fields' => [
-                    'app_id' => 'App ID',
-                    'ad_unit_id' => 'Ad Unit ID',
+                    'site_id' => 'Site ID',
                     'api_key' => 'API Key'
                 ],
-                'icon' => 'admob',
-                'color' => 'from-green-500 to-blue-500'
-            ],
-            'applovin' => [
-                'name' => 'AppLovin MAX',
-                'fields' => [
-                    'sdk_key' => 'SDK Key',
-                    'ad_unit_id' => 'Ad Unit ID',
-                    'api_key' => 'API Key'
-                ],
-                'icon' => 'applovin',
-                'color' => 'from-purple-500 to-pink-500'
+                'icon' => 'globe',
+                'color' => 'from-indigo-500 to-purple-500'
             ]
         ];
 
@@ -92,10 +76,9 @@ class AdNetwork extends Model
     {
         return [
             'google' => self::getProviderConfig('google'),
-            'unity' => self::getProviderConfig('unity'),
-            'facebook' => self::getProviderConfig('facebook'),
-            'admob' => self::getProviderConfig('admob'),
-            'applovin' => self::getProviderConfig('applovin'),
+            'propellerads' => self::getProviderConfig('propellerads'),
+            'adsterra' => self::getProviderConfig('adsterra'),
+            'medianet' => self::getProviderConfig('medianet'),
         ];
     }
 
@@ -111,16 +94,14 @@ class AdNetwork extends Model
             switch ($this->provider) {
                 case 'google':
                     return $this->testGoogleAds();
-                case 'unity':
-                    return $this->testUnityAds();
-                case 'facebook':
-                    return $this->testFacebookAds();
-                case 'admob':
-                    return $this->testAdMob();
-                case 'applovin':
-                    return $this->testAppLovin();
+                case 'propellerads':
+                    return $this->testPropellerAds();
+                case 'adsterra':
+                    return $this->testAdsterra();
+                case 'medianet':
+                    return $this->testMediaNet();
                 default:
-                    return ['success' => false, 'message' => 'Unknown provider'];
+                    return ['success' => false, 'message' => 'Unknown or unsupported provider'];
             }
         } catch (\Exception $e) {
             return ['success' => false, 'message' => $e->getMessage()];
@@ -129,48 +110,69 @@ class AdNetwork extends Model
 
     private function testGoogleAds()
     {
-        // Simulate Google Ads API test
         if (empty($this->credentials['client_id']) || empty($this->credentials['client_secret'])) {
             return ['success' => false, 'message' => 'Missing required credentials'];
         }
-        
-        // In real implementation, you would make actual API call
-        return ['success' => true, 'message' => 'Google Ads connection successful'];
+
+        try {
+            $client = new \GuzzleHttp\Client();
+
+            $response = $client->post('https://oauth2.googleapis.com/token', [
+                'form_params' => [
+                    'client_id'     => $this->credentials['client_id'],
+                    'client_secret' => $this->credentials['client_secret'],
+                    'grant_type'    => 'client_credentials',
+                ],
+            ]);
+
+            $data = json_decode($response->getBody(), true);
+
+            if (isset($data['access_token'])) {
+                return ['success' => true, 'message' => 'Google Ads connection successful'];
+            }
+
+            return ['success' => false, 'message' => 'Failed to get access token'];
+
+        } catch (\Exception $e) {
+            return ['success' => false, 'message' => 'API Error: ' . $e->getMessage()];
+        }
     }
 
-    private function testUnityAds()
+    private function testPropellerAds()
     {
-        if (empty($this->credentials['game_id']) || empty($this->credentials['api_key'])) {
-            return ['success' => false, 'message' => 'Missing required credentials'];
+        if (empty($this->credentials['public_key'])) {
+            return ['success' => false, 'message' => 'Missing Public Key'];
         }
-        
-        return ['success' => true, 'message' => 'Unity Ads connection successful'];
+
+        // Simulasi: misal harus diawali "pub-"
+        if (strpos($this->credentials['public_key'], 'pub-') !== 0) {
+            return ['success' => false, 'message' => 'Invalid Public Key format'];
+        }
+
+        // Kalau lolos, anggap valid
+        return ['success' => true, 'message' => 'PropellerAds config valid (simulated)'];
     }
 
-    private function testFacebookAds()
+    private function testAdsterra()
     {
-        if (empty($this->credentials['app_id']) || empty($this->credentials['app_secret'])) {
-            return ['success' => false, 'message' => 'Missing required credentials'];
+        if (empty($this->credentials['public_key'])) {
+            return ['success' => false, 'message' => 'Missing Public Key'];
         }
-        
-        return ['success' => true, 'message' => 'Facebook Ads connection successful'];
+
+        return ['success' => true, 'message' => 'Adsterra config valid (simulated)'];
     }
 
-    private function testAdMob()
+    private function testMediaNet()
     {
-        if (empty($this->credentials['app_id']) || empty($this->credentials['ad_unit_id'])) {
-            return ['success' => false, 'message' => 'Missing required credentials'];
+        if (empty($this->credentials['site_id']) || empty($this->credentials['api_key'])) {
+            return ['success' => false, 'message' => 'Missing Site ID or API Key'];
         }
-        
-        return ['success' => true, 'message' => 'AdMob connection successful'];
-    }
 
-    private function testAppLovin()
-    {
-        if (empty($this->credentials['sdk_key']) || empty($this->credentials['ad_unit_id'])) {
-            return ['success' => false, 'message' => 'Missing required credentials'];
+        // Simulasi: API Key minimal 20 karakter
+        if (strlen($this->credentials['api_key']) < 20) {
+            return ['success' => false, 'message' => 'API Key too short'];
         }
-        
-        return ['success' => true, 'message' => 'AppLovin connection successful'];
+
+        return ['success' => true, 'message' => 'Media.net config valid (simulated)'];
     }
 }

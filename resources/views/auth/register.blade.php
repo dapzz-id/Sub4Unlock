@@ -7,7 +7,7 @@
             <div class="bg-white/5 border border-white/10 backdrop-blur-md rounded-lg p-6">
                 <div class="text-center mb-6">
                     <h2 class="text-2xl text-white font-semibold">Create Account</h2>
-                    <p class="text-gray-400 mt-2">Enter your details to create a new admin account</p>
+                    <p class="text-gray-400 mt-2">Enter your details to create a new Sub4Unlock account</p>
                 </div>
 
                 <form method="POST" action="{{ route('register') }}">
@@ -27,7 +27,7 @@
                         <div>
                             <label for="name" class="block text-white text-sm font-medium mb-2">Full Name</label>
                             <div class="relative">
-                                <svg class="absolute left-3 top-3 w-4 h-4 text-gray-400" fill="none"
+                                <svg class="absolute left-3 top-4 w-4 h-4 text-gray-400" fill="none"
                                     stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -41,7 +41,7 @@
                         <div>
                             <label for="email" class="block text-white text-sm font-medium mb-2">Email Address</label>
                             <div class="relative">
-                                <svg class="absolute left-3 top-3 w-4 h-4 text-gray-400" fill="none"
+                                <svg class="absolute left-3 top-4 w-4 h-4 text-gray-400" fill="none"
                                     stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207">
@@ -56,7 +56,7 @@
                         <div>
                             <label for="password" class="block text-white text-sm font-medium mb-2">Password</label>
                             <div class="relative">
-                                <svg class="absolute left-3 top-3 w-4 h-4 text-gray-400" fill="none"
+                                <svg class="absolute left-3 top-4 w-4 h-4 text-gray-400" fill="none"
                                     stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
@@ -72,7 +72,7 @@
                             <label for="password_confirmation" class="block text-white text-sm font-medium mb-2">Confirm
                                 Password</label>
                             <div class="relative">
-                                <svg class="absolute left-3 top-3 w-4 h-4 text-gray-400" fill="none"
+                                <svg class="absolute left-3 top-4 w-4 h-4 text-gray-400" fill="none"
                                     stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">

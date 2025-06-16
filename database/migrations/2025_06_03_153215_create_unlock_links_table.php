@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('views')->default(0);
             $table->integer('unlocks')->default(0);
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->json('social_requirements')->nullable(); // Requirements for social media actions
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

@@ -16,8 +16,6 @@ class AdNetworkObserver
             AdNetwork::where('id', '!=', $adNetwork->id)
                     ->where('is_active', true)
                     ->update(['is_active' => false]);
-            
-            UnlockLink::query()->update(['ad_network_id' => $adNetwork->id]);
         }
     }
 

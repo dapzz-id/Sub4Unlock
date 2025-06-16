@@ -31,6 +31,22 @@
     </div>
 @endsection
 
+@section('mobile-nav-items')
+    <!-- Mobile Navigation Items -->
+    <a href="{{ route('superadmin.ad-networks') }}" class="block text-gray-400 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition-colors">
+        Ad Networks
+    </a>
+    <a href="{{ route('superadmin.users') }}" class="block text-gray-400 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition-colors">
+        Users
+    </a>
+    <form method="POST" action="{{ route('logout') }}" class="block">
+        @csrf
+        <button type="submit" class="w-full text-left text-gray-400 hover:text-white hover:bg-white/10 px-4 py-3 rounded-lg transition-colors">
+            Logout
+        </button>
+    </form>
+@endsection
+
 @section('content')
     <div class="container mx-auto px-4 py-8">
         <!-- Stats Cards -->
@@ -131,7 +147,7 @@
                 </div>
                 <a href="{{ route('superadmin.ad-networks') }}"
                     class="bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 text-white px-4 py-2 rounded-lg transition-all">
-                    Manage Ad Networks
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-left-open-icon lucide-panel-left-open"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="m14 9 3 3-3 3"/></svg>
                 </a>
             </div>
 

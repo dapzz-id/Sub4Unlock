@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function unlockLinks()
+    {
+        return $this->hasMany(UnlockLink::class);
+    }
 }

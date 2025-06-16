@@ -36,6 +36,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                     </svg>
                 </a>
+                <a href="{{ route('unlock.show', 'DEMO') }}" class="border border-white/20 text-white hover:bg-white/10 px-6 py-3 sm:px-8 sm:py-4 rounded-lg text-base sm:text-lg font-medium transition-all inline-flex items-center justify-center">
+                    Try Demo
+                </a>
             </div>
         </div>
     </section>
@@ -112,6 +115,24 @@
                         <p class="text-sm sm:text-base text-gray-400">{{ $feature['description'] }}</p>
                     </div>
                 @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-12 md:py-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/20 backdrop-blur-md rounded-lg p-8 sm:p-12 max-w-4xl mx-auto">
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-white">Ready to Enter the Future?</h3>
+                <p class="text-lg sm:text-xl text-gray-300 mb-6 sm:mb-8">
+                    Join millions of users already unlocking content in the digital frontier
+                </p>
+                <a href="{{ route('unlock.enter-code') }}" class="bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 text-white px-8 py-4 sm:px-12 sm:py-4 rounded-lg text-base sm:text-lg font-medium transition-all inline-flex items-center justify-center">
+                    Begin Your Journey
+                    <svg class="ml-2 w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>

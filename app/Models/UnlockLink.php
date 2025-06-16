@@ -17,7 +17,8 @@ class UnlockLink extends Model
         'views',
         'unlocks',
         'status',
-        'user_id'
+        'user_id',
+        'social_requirements'
     ];
 
     public function user()
@@ -33,5 +34,10 @@ class UnlockLink extends Model
     public function incrementUnlocks()
     {
         $this->increment('unlocks');
+    }
+
+    public function adNetwork()
+    {
+        return $this->belongsTo(AdNetwork::class, 'ad_network_id');
     }
 }

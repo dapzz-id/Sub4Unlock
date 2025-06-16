@@ -121,7 +121,7 @@ class SuperAdminController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', Password::min(6)],
-            'role' => 'required|in:admin,user',
+            'role' => 'required|in:admin,superadmin',
         ],[
             'email.unique' => 'The email has already been taken.',
             'role.in' => 'The selected role is invalid.',
